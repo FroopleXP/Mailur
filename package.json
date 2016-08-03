@@ -1,0 +1,17 @@
+{
+  "name": "mailur",
+  "version": "1.0.0",
+  "description": "",
+  "main": "mailur.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Connor Edwards",
+  "license": "MIT",
+  "dependencies": {
+    "ejs": "~2.5.1",
+    "bcrypt": "~0.8.7",
+    "express": "~4.14.0",
+    "mongoose": "~4.5.8"
+  }
+}

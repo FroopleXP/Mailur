@@ -1,0 +1,4 @@
+/node_modules/
+node_modules/
+/config/app_config.js
+config/app_config.js
