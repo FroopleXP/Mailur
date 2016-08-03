@@ -1,0 +1,22 @@
+<table>
+    <tr colspan="2">
+        <td>Username: </td>
+        <td><input type='text' ng-model='register_details.username' placeholder="Username"></td>
+    </tr>
+    <tr colspan="2">
+        <td>Email: </td>
+        <td><input type='email' ng-model='register_details.email' placeholder="Email"></td>
+    </tr>
+    <tr colspan="2">
+        <td>Password: </td>
+        <td><input type='password' ng-model='register_details.password' placeholder="Password"></td>
+    </tr>
+    <tr colspan="2">
+        <td>Confirm Password: </td>
+        <td><input type='password' ng-model='register_details.confirm_password' placeholder="Confirm Password"></td>
+    </tr>
+    <tr colspan="2">
+        <td></td>
+        <td><button type="submit" ng-click="register(register_details)">Register</button></td>
+    </tr>
+</table>

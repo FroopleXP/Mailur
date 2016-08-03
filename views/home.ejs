@@ -1,8 +1,18 @@
 <html>
     <head>
         <title><%= title %></title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js"></script>
+        <script src="views/app/mailur_app.js"></script>
     </head>
-    <body>
-        <h1>Welcome to Mailur...</h1>
+    <body ng-app="mailur">
+
+        <!-- Main page view -->
+        <ng-view></ng-view><hr />
+
+        <a href="#/">Home</a>
+        <a href="#dashboard">Dashboard</a>
+        <a href="#register">Register</a>
+
     </body>
 </html>
