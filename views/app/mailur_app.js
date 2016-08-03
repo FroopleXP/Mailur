@@ -52,10 +52,10 @@ angular.module("mailur", ["ngRoute"])
             var q = $q.defer();
             $http.post("http://localhost:1337/api/register", register_details)
             .then(function(response) { // We have a response with code 200
-                q.resolve("You've successfully registered!");
+                q.resolve(response);
             })
             .catch(function(err) { // There was an error, something other than status 200
-                q.reject(err.message);
+                q.reject(err);
             })
             return q.promise;
         }
