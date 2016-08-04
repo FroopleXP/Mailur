@@ -1,2 +1,15 @@
-<h1>Chatroom</h1>
-<p>Status: {{ connection_status }}</p>
+<p>Status: {{ connection_status ? 'Connected' : 'Not connected' }}</p>
+
+<form ng-submit="send_message(message)">
+    <fieldset ng-disabled="!connection_status">
+        <input type="text" ng-model="message.nick" placeholder="Nickname">
+        <input type="text" ng-model="message.body" placeholder="Type a message...">
+        <button type="submit">Send</button>
+    </fieldset>
+</form>
+
+<div class="message_window">
+    <div ng-repeat="message in messages">
+        <b>{{ message.nick }}:</b> {{ message.body }}
+    </div>
+</div>

@@ -14,6 +14,9 @@ var server = require('http').createServer(app),
 var server_config = require("./config/app_config.js"),
     api = express.Router();
 
+// User store
+var users = {};
+
 // Configuring the App
 app.set('view engine', 'ejs');
 app.use("/views", express.static(__dirname + '/views'));
@@ -29,10 +32,26 @@ app.get("/", function(req, res) {
 
 // Listening for SocketIO connections
 io.on('connection', function(socket) {
+
     console.log("New connection from: " + socket.id);
+
     socket.on('disconnect', function() {
         console.log("Lost connection to: " + socket.id);
     });
+
+    socket.on('message', function(message) {
+
+        socket.emit('msg_ack');
+
+        // Cleaning the message
+        message.body = xss_filter.inHTMLData(message.body).trim();
+        message.nick = xss_filter.inHTMLData(message.nick).trim();
+
+        // Sending the message to everyone
+        io.sockets.emit('new_message', message);
+
+    });
+
 });
 
 // Starting the app

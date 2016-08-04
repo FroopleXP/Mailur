@@ -23,20 +23,42 @@ angular.module("mailur", ["ngRoute"])
 
 .controller('chatroom_ctrl', function($scope, socket) {
 
+    // Used to store message
+    $scope.messages = [];
+
+    // Used to check the connection status to the server
     $scope.connection_status = socket.get_status();
 
     socket.on('connect', function() {
-        $scope.connection_status = "Connected";
+        $scope.connection_status = true;
     });
 
     socket.on('disconnect', function() {
-        $scope.connection_status = "Not Connected";
+        $scope.connection_status = false;
     });
 
-    $scope.send_message = function(message_body) {
-        socket.emit('message', message_body, function() {
+    socket.on('msg_ack', function() {
+        $scope.message.body = "";
+    });
 
-        });
+    // New message!
+    socket.on('new_message', function(message) {
+        $scope.messages.push(message);
+    });
+
+    // Used to actually send the messages
+    $scope.send_message = function(message_object) {
+        // Trimming and checking the message
+        message_object.body = message_object.body.trim();
+        // Checking length
+        if (message_object.body.length > 0) {
+            socket.emit('message', message_object);
+        }
+    }
+
+    // Used to delete all messages
+    $scope.delete_messages = function() {
+        $scope.messages = [];
     }
 
 })
@@ -50,7 +72,9 @@ angular.module("mailur", ["ngRoute"])
             socket.on(eventName, function() {
                 var args = arguments;
                 $rootScope.$apply(function() {
-                    callback.apply(socket, args);
+                    if (callback) {
+                        callback.apply(socket, args);
+                    }
                 });
             });
         },
@@ -66,11 +90,7 @@ angular.module("mailur", ["ngRoute"])
         },
         get_status: function() {
             // Checking conneciton status
-            if (socket.connected == true) {
-                return "Connected";
-            } else {
-                return "Not connected";
-            }
+            return socket.connected;
         }
     }
 
