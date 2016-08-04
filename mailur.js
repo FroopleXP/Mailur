@@ -6,6 +6,10 @@ var express = require("express"),
     validator = require('validator'),
     app = express();
 
+// Setting up SocketIO
+var server = require('http').createServer(app),
+    io = require('socket.io').listen(server);
+
 // Including config files
 var server_config = require("./config/app_config.js"),
     api = express.Router();
@@ -23,47 +27,15 @@ app.get("/", function(req, res) {
     res.render('home', { title: "Mailur" });
 });
 
-// API routes
-api.post("/register", function(req, res) {
-
-    // Getting and cleaning the data from the form
-    var username = xss_filter.inHTMLData(req.body.username),
-        email = xss_filter.inHTMLData(req.body.email),
-        password = xss_filter.inHTMLData(req.body.password),
-        confirm_password = xss_filter.inHTMLData(req.body.confirm_password);
-
-    // Validating the data
-    if (validator.isEmail(email)) {
-        if (username.length > 5) {
-            if (password === confirm_password) {
-                if (password.length > 6) {
-                    res.sendStatus(200);
-                } else {
-                    res.json(401, {
-                        message: "Password must be longer than 6 Characters"
-                    });
-                }
-            } else {
-                res.json(401, {
-                    message: "Passwords do not match!"
-                });
-            }
-        } else {
-            res.json(401, {
-                message: "Username must be longer than 5 characters"
-            });
-        }
-    } else {
-        res.json(401, {
-            message: "Invalid email"
-        });
-    }
-
-
-
+// Listening for SocketIO connections
+io.on('connection', function(socket) {
+    console.log("New connection from: " + socket.id);
+    socket.on('disconnect', function() {
+        console.log("Lost connection to: " + socket.id);
+    });
 });
 
 // Starting the app
-app.listen(server_config.app.port, function() {
+server.listen(server_config.app.port, function() {
     console.log("Mailur server started on port: " + server_config.app.port);
 });

@@ -9,13 +9,9 @@ angular.module("mailur", ["ngRoute"])
         templateUrl: "views/app_views/home.htm",
         controller: 'home_ctrl'
     })
-    .when("/dashboard", {
-        templateUrl: "views/app_views/dashboard.htm",
-        controller: 'dashboard_ctrl'
-    })
-    .when("/register", {
-        templateUrl: "views/app_views/register.htm",
-        controller: 'register_ctrl'
+    .when("/chatroom", {
+        templateUrl: "views/app_views/chatroom.htm",
+        controller: 'chatroom_ctrl'
     })
 
 })
@@ -25,41 +21,59 @@ angular.module("mailur", ["ngRoute"])
 
 })
 
-.controller('dashboard_ctrl', function($scope) {
+.controller('chatroom_ctrl', function($scope, socket) {
 
-})
+    $scope.connection_status = socket.get_status();
 
-.controller('register_ctrl', function($scope, regsiter_serv) {
+    socket.on('connect', function() {
+        $scope.connection_status = "Connected";
+    });
 
-    // Function used to register the user
-    $scope.register = function(register_details) {
-        regsiter_serv.register(register_details)
-        .then(function(success) {
-            alert(success);
-        })
-        .catch(function(err) {
-            alert(err);
-        })
+    socket.on('disconnect', function() {
+        $scope.connection_status = "Not Connected";
+    });
+
+    $scope.send_message = function(message_body) {
+        socket.emit('message', message_body, function() {
+
+        });
     }
 
 })
 
-// Factorys
-.factory('regsiter_serv', function($q, $http) {
+.factory('socket', function($rootScope) {
+
+    var socket = io();
+
     return {
-        register: function(register_details) {
-            // Sending the details to the API, creating the promise
-            var q = $q.defer();
-            $http.post("http://localhost:1337/api/register", register_details)
-            .then(function(response) { // We have a response with code 200
-                q.resolve(response);
-            })
-            .catch(function(err) { // There was an error, something other than status 200
-                q.reject(err);
-            })
-            return q.promise;
+        on: function(eventName, callback) {
+            socket.on(eventName, function() {
+                var args = arguments;
+                $rootScope.$apply(function() {
+                    callback.apply(socket, args);
+                });
+            });
+        },
+        emit: function(eventName, data, callback) {
+            socket.emit(eventName, data, function() {
+                var args = arguments;
+                $rootScope.$apply(function() {
+                    if (callback) {
+                        callback.apply(socket, args);
+                    }
+                });
+            });
+        },
+        get_status: function() {
+            // Checking conneciton status
+            if (socket.connected == true) {
+                return "Connected";
+            } else {
+                return "Not connected";
+            }
         }
     }
+
 })
 
 .factory('redirect', function($state) {
