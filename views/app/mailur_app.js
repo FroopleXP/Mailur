@@ -6,18 +6,9 @@ angular.module("mailur", ["ngRoute"])
 
     $routeProvider
     .when("/", {
-        templateUrl: "views/app_views/home.htm",
-        controller: 'home_ctrl'
-    })
-    .when("/chatroom", {
         templateUrl: "views/app_views/chatroom.htm",
         controller: 'chatroom_ctrl'
     })
-
-})
-
-// Controllers
-.controller('home_ctrl', function($scope) {
 
 })
 
@@ -54,6 +45,12 @@ angular.module("mailur", ["ngRoute"])
         if (message_object.body.length > 0) {
             socket.emit('message', message_object);
         }
+    }
+
+    // Used to send the Enigma Rotors
+    $scope.update_rotors = function(rotor_settings, socket) {
+        // Sending the rotor settings...
+        socket.emit('rotor_update', rotor_settings);
     }
 
     // Used to delete all messages

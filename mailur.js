@@ -46,6 +46,7 @@ io.on('connection', function(socket) {
         // Cleaning the message
         message.body = xss_filter.inHTMLData(message.body).trim();
         message.nick = xss_filter.inHTMLData(message.nick).trim();
+        message.time = Math.floor(Date.now() / 1000);
 
         // Sending the message to everyone
         io.sockets.emit('new_message', message);
