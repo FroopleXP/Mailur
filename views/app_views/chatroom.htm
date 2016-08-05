@@ -21,7 +21,10 @@
             <fieldset class="message_window">
                 <legend>Chatroom</legend>
                 <div ng-repeat="message in messages | orderBy:'-time'">
-                    <b>{{ message.nick }}:</b> {{ message.body }} <small> ({{ message.dec_text }})</small>
+                    <div class="message_container">
+                        <b>{{ message.nick }}</b><button class="dec_btn" ng-click="show=!show">{{ !show ? 'Decrypt' : 'Encrypt' }}</button><br />
+                        {{ !show ? message.body : message.dec_text }}
+                    </div>
                 </div>
             </fieldset>
         </td>

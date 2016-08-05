@@ -31,6 +31,23 @@ form {
     margin: 0px 10% 0px 10%;
 }
 
+.dec_btn {
+    border: 0px;
+    background-color: rgba(255, 255, 255, 0);
+    padding: 5px;
+    color: purple;
+    font-size: 0.7em;
+}
+
+.message_container {
+    max-width: 100%;
+    font-size: 0.8em;
+}
+
+.dec_btn:hover {
+    cursor: pointer;
+}
+
 .chatroom_table {
     width: 100%;
 }
