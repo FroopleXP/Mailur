@@ -26,7 +26,7 @@
             </fieldset>
         </td>
         <td width="30%" align="center">
-            <fieldset>
+            <fieldset ng-disabled="!connection_status">
                 <legend>Enigma Settings</legend>
                 <select name="rotor_1" ng-model="rotor_settings.rotor_1">
                     <option value="A">A</option>
