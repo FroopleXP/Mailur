@@ -53,6 +53,11 @@ io.on('connection', function(socket) {
 
     });
 
+    socket.on('rotor_update', function(settings) {
+        console.log(settings);
+        io.sockets.emit('rotor_update', settings);
+    });
+
 });
 
 // Starting the app

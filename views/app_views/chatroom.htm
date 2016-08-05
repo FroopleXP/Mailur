@@ -21,31 +21,32 @@
             <fieldset class="message_window">
                 <legend>Chatroom</legend>
                 <div ng-repeat="message in messages | orderBy:'-time'">
-                    <b>{{ message.nick }}:</b> {{ message.body }}
+                    <b>{{ message.nick }}:</b> {{ message.body }} <small> ({{ message.dec_text }})</small>
                 </div>
             </fieldset>
         </td>
         <td width="30%" align="center">
             <fieldset>
                 <legend>Enigma Settings</legend>
-                <select ng-model="rotor_1">
-                    <option value="a">A</option>
-                    <option value="b">B</option>
-                    <option value="c">C</option>
-                    <option value="d">D</option>
+                <select name="rotor_1" ng-model="rotor_settings.rotor_1">
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
                 </select>
-                <select ng-model="rotor_2">
-                    <option value="a">A</option>
-                    <option value="b">B</option>
-                    <option value="c">C</option>
-                    <option value="d">D</option>
+                <select name="rotor_2" ng-model="rotor_settings.rotor_2">
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
                 </select>
-                <select ng-model="rotor_3">
-                    <option value="a">A</option>
-                    <option value="b">B</option>
-                    <option value="c">C</option>
-                    <option value="d">D</option>
+                <select name="rotor_3" ng-model="rotor_settings.rotor_3">
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
                 </select>
+                <button type="submit" ng-click="update_rotors(rotor_settings)">Send Settings</button>
             </fieldset>
         </td>
     </tr>
