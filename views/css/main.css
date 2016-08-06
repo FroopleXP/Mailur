@@ -5,6 +5,7 @@
 body, html {
     padding: 10px;
     margin: 0px;
+    min-width:
 }
 
 a {
@@ -27,6 +28,7 @@ form {
 
 .ng_viewer {
     width: 80%;
+    max-width: 80%;
     height: auto;
     margin: 0px 10% 0px 10%;
 }
@@ -42,6 +44,11 @@ form {
 .message_container {
     max-width: 100%;
     font-size: 0.8em;
+    margin-bottom: 10px;
+}
+
+.message_container p {
+    margin: 0px;
 }
 
 .dec_btn:hover {
@@ -52,8 +59,45 @@ form {
     width: 100%;
 }
 
+.connected_users_container {
+    width: 15%;
+    max-width: 15%;
+    min-width: 135px;
+    height: auto;
+}
+
+.connected_users {
+    overflow-y: auto;
+    word-break: break-all;
+    height: 200px;
+    max-height: 200px;
+    font-size: 0.8em;
+}
+
+.message_window_container {
+    height: auto;
+    width: 55%;
+    max-width: 55%;
+    min-width: 550px;
+}
+
 .message_window {
     height: 200px;
+    max-height: 200px;
+    overflow-y: auto;
+    word-break: break-all;
+}
+
+.enigma_settings_container {
+    height: auto;
+    width: 30%;
+    max-width: 30%;
+    min-width: 300px;
+}
+
+.enigma_settings {
+    height: 200px;
+    max-height: 200px;
     overflow-y: auto;
 }
 

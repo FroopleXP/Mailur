@@ -33,10 +33,18 @@ app.get("/", function(req, res) {
 // Listening for SocketIO connections
 io.on('connection', function(socket) {
 
-    console.log("New connection from: " + socket.id);
+    // Pushing new user to array
+    users[socket.id] = {
+        nick: "user" + parseInt(Object.keys(users).length + 1),
+        id: socket.id
+    }
+
+    // Sending the new user list...
+    io.sockets.emit('user_list', users);
 
     socket.on('disconnect', function() {
-        console.log("Lost connection to: " + socket.id);
+        delete users[socket.id];
+        io.sockets.emit('user_list', users);
     });
 
     socket.on('message', function(message) {
@@ -45,7 +53,7 @@ io.on('connection', function(socket) {
 
         // Cleaning the message
         message.body = xss_filter.inHTMLData(message.body).trim();
-        message.nick = xss_filter.inHTMLData(message.nick).trim();
+        message.nick = users[socket.id].nick;
         message.time = Math.floor(Date.now() / 1000);
 
         // Sending the message to everyone
@@ -54,7 +62,6 @@ io.on('connection', function(socket) {
     });
 
     socket.on('rotor_update', function(settings) {
-        console.log(settings);
         io.sockets.emit('rotor_update', settings);
     });
 

@@ -14,13 +14,14 @@ angular.module("mailur", ["ngRoute"])
 
 .controller('chatroom_ctrl', function($scope, socket, enigma) {
 
-    // Used to store message and rotor settings
+    // Used to store message, rotor settings and users
     $scope.messages = [];
+    $scope.users = [];
 
     $scope.rotor_settings = {
-        "rotor_1": "A",
+        "rotor_1": "C",
         "rotor_2": "B",
-        "rotor_3": "C"
+        "rotor_3": "A"
     };
 
     // Used to check the connection status to the server
@@ -36,6 +37,11 @@ angular.module("mailur", ["ngRoute"])
 
     socket.on('msg_ack', function() {
         $scope.message.body = "";
+    });
+
+    socket.on('user_list', function(users) {
+        $scope.users = users;
+        $scope.users.count = Object.keys(users).length;
     });
 
     // New message!

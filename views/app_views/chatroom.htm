@@ -1,35 +1,42 @@
 <table class="chatroom_table">
     <tr>
-        <td colspan="2">
+        <td colspan="3">
             <p>Status: {{ connection_status ? 'Connected' : 'Not connected' }}</p>
         </td>
     </tr>
     <tr>
-        <td colspan="2">
+        <td colspan="3">
             <form ng-submit="send_message(message)">
                 <fieldset ng-disabled="!connection_status">
                     <legend>Message area (requires connection)</legend>
-                    <input type="text" ng-model="message.nick" placeholder="Nickname">
                     <input type="text" ng-model="message.body" placeholder="Type a message...">
                     <button type="submit">Send</button>
                 </fieldset>
             </form>
         </td>
     </tr>
-    <tr colspan="2">
-        <td width="70%">
+    <tr colspan="3">
+        <td class="connected_users_container">
+            <fieldset class="connected_users">
+                <legend>Connected ({{ users.count }})</legend>
+                <div ng-repeat="user in users">
+                    {{ user.nick }}
+                </div>
+            </fieldset>
+        </td>
+        <td class="message_window_container">
             <fieldset class="message_window">
                 <legend>Chatroom</legend>
                 <div ng-repeat="message in messages | orderBy:'-time'">
                     <div class="message_container">
                         <b>{{ message.nick }}</b><button class="dec_btn" ng-click="show=!show">{{ !show ? 'Decrypt' : 'Encrypt' }}</button><br />
-                        {{ !show ? message.body : message.dec_text }}
+                        <p>{{ !show ? message.body : message.dec_text }}</p>
                     </div>
                 </div>
             </fieldset>
         </td>
-        <td width="30%" align="center">
-            <fieldset ng-disabled="!connection_status">
+        <td class="engima_settings_container">
+            <fieldset ng-disabled="!connection_status" class="enigma_settings">
                 <legend>Enigma Settings</legend>
                 <select name="rotor_1" ng-model="rotor_settings.rotor_1">
                     <option value="A">A</option>
@@ -54,7 +61,7 @@
         </td>
     </tr>
     <tr>
-        <td colspan="2" align="top">
+        <td colspan="3" align="top">
             <fieldset>
                 <legend>Options</legend>
                 <button ng-click="delete_messages()" title="This only deletes the messages on your machine!">Delete Messages</button>

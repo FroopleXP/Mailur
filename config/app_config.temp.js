@@ -1,6 +1,6 @@
 module.exports = {
     app: {
-        name: 'Mailur',
+        name: 'EnMailur',
         port: PORT
     }
 }
