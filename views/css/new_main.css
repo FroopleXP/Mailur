@@ -1,0 +1,98 @@
+html, body {
+    padding: 0px;
+    margin: 0px;
+    font-family: arial, sans-serif;
+    font-size: 0.5em;
+}
+
+td, tr, table {
+    padding: 0px;
+    margin: 0px;
+    vertical-align: top;
+}
+
+td {
+    padding: 5px;
+}
+
+.mailur_container {
+    min-width: 740px;
+    min-height: 360px;
+}
+
+.mailur_header {
+    height: 50px;
+    background-color: #3498db;
+    border-bottom: 3px solid #2980b9;
+    color: #ecf0f1;
+}
+
+.mailur_msg_viewer {
+    width: 80%;
+    background-color: #ecf0f1;
+}
+
+.mailur_msg_viewer .mailur_msg_container {
+    height: 100%;
+    max-height: 100%;
+    overflow-y: auto;
+    word-break: break-all;
+}
+
+.mailur_msg_viewer .mailur_msg_container .msg_body_container {
+    max-width: 100%;
+    font-size: 0.8em;
+    margin-bottom: 10px;
+}
+
+.mailur_connection {
+    height: 20px;
+    font-size: 0.6em;
+    text-transform: uppercase;
+    padding: 5px;
+    text-emphasis: bold;
+    color: white;
+    background-color: #2c3e50;
+}
+
+#stat_bulb {
+    width: 7px;
+    height: 7px;
+    border-radius: 100%;
+    display: inline-block;
+    margin: 0px;
+    padding: 0px;
+}
+
+.msg_input {
+    height: 30px;
+    margin: 3px 0px 0px 5px;
+    background-color: #ecf0f1;
+    border: none;
+    width: 100%;
+    font-size: 0.8em;
+    vertical-align: top;
+}
+
+.success_stat {
+    background-color: #2ecc71;
+}
+
+.fail_stat {
+    background-color: #e74c3c;
+}
+
+.mailur_enigma_settings {
+    /*background-color: #ecf0f1;*/
+}
+
+.mailur_user_viewer {
+    width: 20%;
+    background-color: #34495e;
+    border-left: 3px solid #2c3e50;
+}
+
+.mailur_msg_input {
+    height: 70px;
+    background-color: #ecf0f1;
+}

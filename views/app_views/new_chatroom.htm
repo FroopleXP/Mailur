@@ -1,0 +1,63 @@
+<table border="0" cellspacing="0" cellpadding="0" width="100%" height="100%" class="mailur_container">
+    <tr>
+        <td colspan="2" class="mailur_header">
+            EnMailur
+        </td>
+    </tr>
+    <tr>
+        <td class="mailur_msg_viewer">
+            <div class="mailur_msg_container">
+                <div ng-repeat="message in messages | orderBy:'-time'">
+                    <div class="msg_body_container">
+                        <b>{{ message.nick }}</b><button class="dec_btn" ng-click="show=!show">{{ !show ? 'Decrypt' : 'Encrypt' }}</button><br />
+                        <p>{{ !show ? message.body : message.dec_text }}</p>
+                    </div>
+                </div>
+            </div>
+        </td>
+        <td class="mailur_user_viewer">
+            <legend>Connected ({{ users.count }})</legend>
+            <div ng-repeat="user in users">
+                {{ user.nick }}
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td class="mailur_connection">
+            <p>Status: <span class="{{ connection_status ? 'success_stat' : 'fail_stat' }}" id="stat_bulb"></span></p>
+        </td>
+        <td class="mailur_connection">
+            <p>Enigma Settings</p>
+        </td>
+    </tr>
+    <tr>
+        <td class="mailur_msg_input">
+            <form ng-submit="send_message(message)">
+                <input type="text" class="msg_input" ng-model="message.body" placeholder="Type a message..." ng-disabled="!connection_status">
+            </form>
+        </td>
+        <td class="mailur_enigma_settings">
+            <center>
+                <select name="rotor_1" ng-model="rotor_settings.rotor_1" ng-disabled="!connection_status" ng-change="update_rotors(rotor_settings)">
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                </select>
+                <select name="rotor_2" ng-model="rotor_settings.rotor_2" ng-disabled="!connection_status" ng-change="update_rotors(rotor_settings)">
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                </select>
+                <select name="rotor_3" ng-model="rotor_settings.rotor_3" ng-disabled="!connection_status" ng-change="update_rotors(rotor_settings)">
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                </select>
+                <button ng-click="delete_messages()" title="This only deletes the messages on your machine!">Delete Messages</button>
+            </center>
+        </td>
+    </tr>
+</table>

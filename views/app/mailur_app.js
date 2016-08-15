@@ -6,7 +6,7 @@ angular.module("mailur", ["ngRoute"])
 
     $routeProvider
     .when("/", {
-        templateUrl: "views/app_views/chatroom.htm",
+        templateUrl: "views/app_views/new_chatroom.htm",
         controller: 'chatroom_ctrl'
     })
 
@@ -97,7 +97,7 @@ angular.module("mailur", ["ngRoute"])
 
     // The rotors
     var  rot_comm = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
-            rot_a = ['D', 'M', 'T', 'W', 'S', 'I', 'L' ,'R' ,'U', 'Y', 'Q', 'N', 'K', 'F', 'E', 'J', 'C', 'A', 'Z', 'B', 'P', 'G', 'X', 'O', 'H', 'V'],
+            rot_a = ['D', 'M', 'T', 'W', 'S', 'I', 'L' ,'R', 'U', 'Y', 'Q', 'N', 'K', 'F', 'E', 'J', 'C', 'A', 'Z', 'B', 'P', 'G', 'X', 'O', 'H', 'V'],
             rot_b = ['H', 'Q', 'Z', 'G', 'P', 'J', 'T', 'M', 'O', 'B', 'L', 'N', 'C', 'I', 'F', 'D', 'Y', 'A', 'W', 'V', 'E', 'U', 'S', 'R', 'K', 'X'],
             rot_c = ['U', 'Q', 'N', 'T', 'L', 'S', 'Z', 'F', 'M', 'R', 'E', 'H', 'D', 'P', 'X', 'K', 'I', 'B', 'V', 'Y', 'G', 'J', 'C', 'W', 'O', 'A'],
             rot_d = ['J', 'G', 'D', 'Q', 'O', 'X', 'U', 'S', 'C', 'A', 'M', 'I', 'F', 'R', 'V', 'T', 'P', 'N', 'E', 'W', 'K', 'B', 'L', 'Z', 'Y', 'H'];
